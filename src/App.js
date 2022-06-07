@@ -38,10 +38,11 @@ import { useStateContext } from "./contexts/ContextProvider";
 // import { StateContext } from "./contexts/ContextProvider";
 
 const App = () => {
-  const { activeMenu, themeSettings,setThemeSettings } = useStateContext();
+  const { activeMenu, themeSettings,setThemeSettings, currentColor, currentMode } = useStateContext();
 
   return (
     <>
+    <div className={`${currentMode === "dark" ? "dark" : ""}`}>
     {themeSettings && <ThemeSettings />}
       <BrowserRouter>
         {/*-- Main Parent div --*/}
@@ -52,7 +53,7 @@ const App = () => {
               <button
               onClick={() => {setThemeSettings(true)}}
                 className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
-                style={{ backgroundColor: "blue", borderRadius: "50%" }}
+                style={{ backgroundColor: currentColor, borderRadius: "50%" }}
               >
                 <FiSettings />
               </button>
@@ -80,7 +81,7 @@ const App = () => {
             {/* -- END: siderbar -- */}
 
             {/* -- NavBar -- */}
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+            <div className="static bg-white dark:bg-black navbar w-full  ">
               <Navbar />
             </div>
             {/* -- END: NavBar -- */}
@@ -115,6 +116,7 @@ const App = () => {
         </div>
         {/*-- END : Main Parent div --*/}
       </BrowserRouter>
+      </div>
     </>
   );
 };

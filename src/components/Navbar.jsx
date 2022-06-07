@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { FiShoppingCart } from "react-icons/fi";
 import { BsChatLeft } from "react-icons/bs";
@@ -6,9 +6,8 @@ import { RiNotification3Line } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../contexts/ContextProvider";
-import {Chat, Cart, Notification, UserProfile} from "./"
+import { Chat, Cart, Notification, UserProfile } from "./";
 import avatar from "../data/avatar.jpg";
-
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -27,28 +26,36 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   </TooltipComponent>
 );
 
-
 const Navbar = () => {
-  const { activeMenu, setActiveMenu,isClicked, setIsClicked, handleClick, screenSize, setScreeSize, currentColor } = useStateContext();
-  
+  const {
+    activeMenu,
+    setActiveMenu,
+    isClicked,
+    setIsClicked,
+    handleClick,
+    screenSize,
+    setScreeSize,
+    currentColor,
+  } = useStateContext();
+
   useEffect(() => {
     const handelResize = () => setScreeSize(window.innerWidth);
     window.addEventListener("resize", handelResize);
-    
+
     handelResize();
 
     return () => {
-      window.removeEventListener("resize", handelResize)
+      window.removeEventListener("resize", handelResize);
     };
   }, []);
 
-  useEffect(() =>{
-    if(screenSize <= 900){
-      setActiveMenu(false)
-    }else{
-      setActiveMenu(true)
+  useEffect(() => {
+    if (screenSize <= 900) {
+      setActiveMenu(false);
+    } else {
+      setActiveMenu(true);
     }
-  }, [screenSize])
+  }, [screenSize]);
 
   return (
     <>
@@ -65,29 +72,23 @@ const Navbar = () => {
         <div className="flex">
           <NavButton
             title="Cart"
+            customFunc={() => handleClick("cart")}
             color={currentColor}
             icon={<FiShoppingCart />}
-            customFunc={() => {
-              handleClick("cart");
-            }}
           />
           <NavButton
             title="Chat"
-            icon={<BsChatLeft />}
+            dotColor="#03C9D7"
+            customFunc={() => handleClick("chat")}
             color={currentColor}
-            dotColor="blue"
-            customFunc={() => {
-              handleClick("chat");
-            }}
+            icon={<BsChatLeft />}
           />
           <NavButton
             title="Notification"
-            icon={<RiNotification3Line />}
+            dotColor="rgb(254, 201, 15)"
+            customFunc={() => handleClick("notification")}
             color={currentColor}
-            dotColor="blue"
-            customFunc={() => {
-              handleClick("notification");
-            }}
+            icon={<RiNotification3Line />}
           />
           <TooltipComponent
             content="Profile"
@@ -111,7 +112,7 @@ const Navbar = () => {
 
           {isClicked.cart && <Cart />}
           {isClicked.chat && <Chat />}
-          {isClicked.notification && <Notification/>}
+          {isClicked.notification && <Notification />}
           {isClicked.userProfile && <UserProfile />}
         </div>
       </div>

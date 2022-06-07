@@ -53,7 +53,6 @@ const Sidebar = () => {
 
             {/* Sidebar all Link */}
             <div className="mt-10">
-              {console.log(links)}
               {links.map((item, index) => (
                 <div key={index}>
                   <p className="text-gray-500 m-3 mt-4 uppercase">

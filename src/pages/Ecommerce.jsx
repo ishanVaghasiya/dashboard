@@ -22,10 +22,10 @@ import { useStateContext } from "../contexts/ContextProvider";
 import product9 from "../data/product9.jpg";
 
 const Ecommerce = () => {
-  const { currentColor } = useStateContext();
+  const { currentColor, currentMode } = useStateContext();
   return (
     // Perent div
-    <div className="mt-12">
+    <div className="mt-12" >
       
       <div className="flex flex-wrap lg:flex-nowrap justify-center">
         {/* Download earning card */}
@@ -125,7 +125,14 @@ const Ecommerce = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-400"></div>
+        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-400" style={{backgroundColor: currentColor}}>
+          <p className="text-3xl font-semibold border-b-1 pb-4 text-white border-color">Daily Activity</p>
+          <div className="bg-white h-48 ">
+          <p className="text-2xl text-slate-50">New Features</p>
+          <p className="text-xl text-slate-600 text-center">Comming Soon...</p>
+          </div>
+          <p className="text-xl text-justify pt-5 text-slate-50">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore repellendus possimus dolore quaerat fugiat consectetur repudiandae! Sed consectetur ut eveniet.</p>
+        </div>
       </div>
     </div> // Close Perent div
   );
