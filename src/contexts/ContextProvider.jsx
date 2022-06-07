@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 
 const StateContext = createContext();
+
 const initialState = {
   chat: false,
   cart: false,
@@ -12,18 +13,18 @@ const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(true);
   const [isClicked, setIsClicked] = useState(initialState);
   const [screenSize, setScreeSize] = useState(undefined);
-  const [currentColor, setCurrentColor] = useState("#03C9D7");
-  const [currentMode, setCurrentMode] = useState("light");
+  const [currentColor, setCurrentColor] = useState(localStorage.getItem("colorMode"));
+  const [currentMode, setCurrentMode] = useState(localStorage.getItem("themeMode"));
   const[themeSettings, setThemeSettings] = useState(false);
 
   const setColor = (colorMode) => {
-    setCurrentColor(colorMode);
     localStorage.setItem("colorMode", colorMode);
+    setCurrentColor(localStorage.getItem("colorMode"));
   };
 
   const setMode = (e) => {
-    setCurrentMode(e.target.value);
     localStorage.setItem("themeMode", e.target.value);
+    setCurrentMode(localStorage.getItem("themeMode")); 
   };
 
   const handleClick = (clicked) => {
@@ -33,6 +34,7 @@ const ContextProvider = ({ children }) => {
   return (
     <StateContext.Provider
       value={{
+        initialState,
         activeMenu,
         setActiveMenu,
         isClicked,
